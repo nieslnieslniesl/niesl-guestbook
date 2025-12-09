@@ -18,7 +18,7 @@ export function HyvesShell({ children }: Props) {
             <span className="text-[#ffd166] wobble">★</span>
           </div>
           <p className="mt-1 font-semibold">
-            Een nostalgisch gastenboek voor legendes, vrienden en internet avonturiers.
+            Gastenboek
           </p>
         </div>
         <div className="flex items-center gap-3 flex-wrap">
@@ -34,8 +34,7 @@ export function HyvesShell({ children }: Props) {
         {children}
       </main>
       <footer className="max-w-5xl mx-auto px-5 pb-10 text-sm font-bold flex justify-between flex-wrap gap-3">
-        <span>Gemaakt met glitter & prisma ✨</span>
-        <span>© {new Date().getFullYear()} Niesl Hyves Gastenboek</span>
+        <span>© {new Date().getFullYear()}</span>
       </footer>
     </div>
   );

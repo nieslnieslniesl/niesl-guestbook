@@ -11,6 +11,7 @@ model TextBlock {
   id        Int      @id @default(autoincrement())
   title     String
   content   String
+  imagePath String?
   pinned    Boolean  @default(true)
   position  Int      @default(0)
   createdAt DateTime @default(now())

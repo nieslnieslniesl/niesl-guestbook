@@ -21,7 +21,7 @@ export default function LoginPage() {
                 type="submit"
                 className="sparkle bg-gradient-to-r from-[#ff5db1] to-[#6ae3ff] w-full py-3 rounded-full font-bold text-lg border-2 border-white/70"
               >
-                Betreed het glitter rijk
+                Inloggen
               </button>
             </form>
             <p className="text-center text-sm font-semibold">

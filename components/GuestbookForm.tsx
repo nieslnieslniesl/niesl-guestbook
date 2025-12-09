@@ -40,21 +40,18 @@ export function GuestbookForm({ onSubmitted }: Props) {
   return (
     <form onSubmit={handleSubmit} className="rainbow-border sparkle">
       <div className="inner space-y-3">
-        <h3 className="text-xl font-black flex items-center gap-2">
-          ✍️ Schrijf in het gastenboek
-          <span className="badge">Wees lief, wees luid!</span>
-        </h3>
+        <h3 className="text-xl font-black">Bericht plaatsen</h3>
         <input
           className="input"
           name="name"
-          placeholder="Jouw legendarische naam"
+          placeholder="Naam"
           required
           maxLength={50}
         />
         <textarea
           className="input"
           name="message"
-          placeholder="Laat je nostalgische shout-out achter..."
+          placeholder="Bericht"
           required
           maxLength={500}
           rows={4}
@@ -73,10 +70,10 @@ export function GuestbookForm({ onSubmitted }: Props) {
           disabled={status === 'loading'}
           className="w-full justify-center"
         >
-          {status === 'loading' ? 'Verzenden...' : 'Plaats in gastenboek'}
+          {status === 'loading' ? 'Verzenden...' : 'Verzenden'}
         </SparkleButton>
         {status === 'success' ? (
-          <div className="text-green-700 font-bold">Verzonden! Wacht op goedkeuring 💖</div>
+          <div className="text-green-700 font-bold">Verzonden. Wacht op goedkeuring.</div>
         ) : null}
         {status === 'error' ? (
           <div className="text-red-700 font-bold">{error}</div>

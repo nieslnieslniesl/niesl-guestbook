@@ -8,6 +8,7 @@ type Props = {
     id: number;
     title: string;
     content: string;
+    imagePath?: string | null;
     pinned: boolean;
     position: number;
   };
@@ -21,16 +22,10 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
     event.preventDefault();
     setError('');
     const formData = new FormData(event.currentTarget);
-    const payload = Object.fromEntries(formData.entries());
     const method = block ? 'PATCH' : 'POST';
     const res = await fetch('/api/guestbook/blocks', {
       method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...payload,
-        id: block?.id ? Number(block.id) : undefined,
-        pinned: payload.pinned === 'on'
-      })
+      body: formData
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
@@ -92,6 +87,17 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
           required
           maxLength={1000}
         />
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          className="text-sm"
+        />
+        {block?.imagePath && (
+          <div className="text-xs text-gray-600">
+            Huidige afbeelding: <a href={block.imagePath} target="_blank" rel="noopener noreferrer" className="underline">{block.imagePath}</a>
+          </div>
+        )}
         <div className="flex items-center gap-2">
           <input
             id={`pinned-${block?.id ?? 'new'}`}
@@ -110,6 +116,9 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
           defaultValue={block?.position ?? 0}
           placeholder="Positie (lager = eerder)"
         />
+        {block?.id && (
+          <input type="hidden" name="id" value={block.id} />
+        )}
         <SparkleButton type="submit" className="w-full justify-center">
           Blok Opslaan
         </SparkleButton>

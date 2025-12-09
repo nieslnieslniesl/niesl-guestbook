@@ -13,10 +13,7 @@ export default function AdminLayout({
             <div className="inner">
               <header className="flex justify-between items-center flex-wrap gap-3">
                 <div>
-                  <h1 className="text-3xl font-black">Admin Dashboard</h1>
-                  <p className="font-semibold text-sm">
-                    Modereer de chaos. Keur de glitter goed.
-                  </p>
+                  <h1 className="text-3xl font-black">Admin</h1>
                 </div>
                 <a
                   className="text-sm font-bold underline"
