@@ -70,6 +70,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pendingEntries = entries.filter(e => e.status === 'PENDING');
