@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const PROTECTED_PATHS = ['/admin', '/api/guestbook/moderate'];
+const PROTECTED_PATHS = ['/admin', '/api/guestbook/moderate', '/api/admin'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

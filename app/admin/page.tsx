@@ -33,14 +33,32 @@ export default function AdminPage() {
     setLoading(true);
     try {
       const [entriesRes, blocksRes] = await Promise.all([
-        fetch('/api/admin/entries'),
-        fetch('/api/admin/blocks')
+        fetch('/api/admin/entries', { credentials: 'include' }),
+        fetch('/api/admin/blocks', { credentials: 'include' })
       ]);
-      if (entriesRes.ok) {
+      
+      if (!entriesRes.ok) {
+        const errorData = await entriesRes.json().catch(() => ({}));
+        console.error('Failed to fetch entries:', entriesRes.status, errorData);
+        if (entriesRes.status === 401) {
+          router.push('/admin/login');
+          return;
+        }
+        setEntries([]);
+      } else {
         const entriesData = await entriesRes.json();
-        setEntries(entriesData);
+        console.log('Fetched entries:', entriesData.length);
+        setEntries(entriesData || []);
       }
-      if (blocksRes.ok) {
+      
+      if (!blocksRes.ok) {
+        const errorData = await blocksRes.json().catch(() => ({}));
+        console.error('Failed to fetch blocks:', blocksRes.status, errorData);
+        if (blocksRes.status === 401) {
+          router.push('/admin/login');
+          return;
+        }
+      } else {
         const blocksData = await blocksRes.json();
         setBlocks(blocksData);
       }
