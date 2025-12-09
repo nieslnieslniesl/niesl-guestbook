@@ -6,14 +6,22 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  if (!isAdminRequest()) {
-    return NextResponse.json({ message: 'Niet geautoriseerd' }, { status: 401 });
+  try {
+    if (!isAdminRequest()) {
+      return NextResponse.json({ message: 'Niet geautoriseerd' }, { status: 401 });
+    }
+
+    const entries = await prisma.guestbookEntry.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+
+    return NextResponse.json(entries);
+  } catch (error) {
+    console.error('Error fetching entries:', error);
+    return NextResponse.json(
+      { message: 'Fout bij ophalen inzendingen', error: String(error) },
+      { status: 500 }
+    );
   }
-
-  const entries = await prisma.guestbookEntry.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
-
-  return NextResponse.json(entries);
 }
 

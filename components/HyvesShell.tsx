@@ -25,9 +25,6 @@ export function HyvesShell({ children }: Props) {
           <SparkleButton variant="blue" as="a" href="https://niesl.nl">
             niesl.nl
           </SparkleButton>
-          <SparkleButton variant="yellow" as="a" href="/admin">
-            Admin
-          </SparkleButton>
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-5 pb-20 pt-6 space-y-6">
