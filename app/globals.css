@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS:wght@400;700&family=Fredoka+One&display=swap');
+
+:root {
+  --bg: linear-gradient(135deg, #ff9de1 0%, #8dd0ff 50%, #ffe179 100%);
+  --card: rgba(255, 255, 255, 0.9);
+  --accent: #ff5db1;
+  --accent-2: #6ae3ff;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Comic Sans MS', 'Fredoka One', cursive, sans-serif;
+  background: var(--bg);
+  color: #161616;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+.sparkle {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sparkle::after {
+  content: '✨';
+  position: absolute;
+  right: -12px;
+  top: -12px;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sparkle:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: var(--shadow);
+}
+
+.sparkle:hover::after {
+  opacity: 1;
+  transform: rotate(10deg) scale(1.2);
+}
+
+.wobble {
+  animation: wobble 1.8s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(-1deg);
+  }
+}
+
+.grid-bg {
+  background-image: radial-gradient(#ffffff44 1px, transparent 1px),
+    radial-gradient(#ffffff44 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffde7d, #ff8fb1);
+  font-weight: 700;
+  box-shadow: var(--shadow);
+}
+
+.rainbow-border {
+  position: relative;
+  border-radius: 18px;
+  padding: 3px;
+  background: linear-gradient(120deg, #ff5db1, #ffa751, #6ae3ff, #ff5db1);
+  background-size: 300% 300%;
+  animation: borderShift 8s ease infinite;
+}
+
+@keyframes borderShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.rainbow-border .inner {
+  border-radius: 14px;
+  background: var(--card);
+  padding: 18px;
+}
+
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('data:image/svg+xml,%3Csvg width=\"120\" height=\"120\" viewBox=\"0 0 120 120\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Ctext x=\"10\" y=\"70\" font-size=\"60\" fill=\"%23ff5db1\"%3E%26%239829%3B%3C/text%3E%3C/svg%3E');
+  opacity: 0.08;
+  animation: drift 30s linear infinite;
+}
+
+@keyframes drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200px 400px;
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid #ffd1f2;
+  background: #fff8fd;
+  font-size: 15px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #ff5db1;
+  box-shadow: 0 0 0 3px rgba(255, 93, 177, 0.2);
+}
+

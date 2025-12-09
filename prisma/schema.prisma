@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TextBlock {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  pinned    Boolean  @default(true)
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GuestbookEntry {
+  id        Int       @id @default(autoincrement())
+  name      String
+  message   String
+  imagePath String?
+  status    Status    @default(PENDING)
+  ipAddress String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  logs      ModerationLog[]
+}
+
+model ModerationLog {
+  id        Int       @id @default(autoincrement())
+  action    Action
+  reason    String?
+  createdAt DateTime  @default(now())
+  entry     GuestbookEntry @relation(fields: [entryId], references: [id])
+  entryId   Int
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Action {
+  CREATED
+  APPROVED
+  REJECTED
+  UPDATED
+  DELETED
+}
+
