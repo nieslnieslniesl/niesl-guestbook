@@ -15,7 +15,7 @@ async function send(action: string, entryId: number) {
   });
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
-    throw new Error(data?.message || 'Action failed');
+    throw new Error(data?.message || 'Actie mislukt');
   }
 }
 
@@ -33,7 +33,7 @@ export function AdminEntryActions({ entryId, onUpdated }: Props) {
         onClick={() => handle('APPROVE')}
         className="text-xs"
       >
-        Approve
+        Goedkeuren
       </SparkleButton>
       <SparkleButton
         variant="pink"
@@ -41,7 +41,7 @@ export function AdminEntryActions({ entryId, onUpdated }: Props) {
         onClick={() => handle('REJECT')}
         className="text-xs"
       >
-        Reject
+        Afwijzen
       </SparkleButton>
       <SparkleButton
         variant="blue"
@@ -49,7 +49,7 @@ export function AdminEntryActions({ entryId, onUpdated }: Props) {
         onClick={() => handle('DELETE')}
         className="text-xs"
       >
-        Delete
+        Verwijderen
       </SparkleButton>
     </div>
   );

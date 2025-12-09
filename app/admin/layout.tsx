@@ -15,14 +15,14 @@ export default function AdminLayout({
                 <div>
                   <h1 className="text-3xl font-black">Admin Dashboard</h1>
                   <p className="font-semibold text-sm">
-                    Moderate the chaos. Approve the sparkle.
+                    Modereer de chaos. Keur de glitter goed.
                   </p>
                 </div>
                 <a
                   className="text-sm font-bold underline"
                   href="/api/auth/logout"
                 >
-                  Logout
+                  Uitloggen
                 </a>
               </header>
               <div className="mt-6">{children}</div>

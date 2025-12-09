@@ -24,10 +24,12 @@ export function GuestbookForm({ onSubmitted }: Props) {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.message || 'Failed to submit');
+        throw new Error(data?.message || 'Verzenden mislukt');
       }
       setStatus('success');
-      event.currentTarget.reset();
+      if (event.currentTarget) {
+        event.currentTarget.reset();
+      }
       onSubmitted?.();
     } catch (err) {
       setStatus('error');
@@ -39,20 +41,20 @@ export function GuestbookForm({ onSubmitted }: Props) {
     <form onSubmit={handleSubmit} className="rainbow-border sparkle">
       <div className="inner space-y-3">
         <h3 className="text-xl font-black flex items-center gap-2">
-          ✍️ Sign the guestbook
-          <span className="badge">Be nice, be loud!</span>
+          ✍️ Schrijf in het gastenboek
+          <span className="badge">Wees lief, wees luid!</span>
         </h3>
         <input
           className="input"
           name="name"
-          placeholder="Your legendary name"
+          placeholder="Jouw legendarische naam"
           required
           maxLength={50}
         />
         <textarea
           className="input"
           name="message"
-          placeholder="Drop your nostalgic shout-out..."
+          placeholder="Laat je nostalgische shout-out achter..."
           required
           maxLength={500}
           rows={4}
@@ -71,10 +73,10 @@ export function GuestbookForm({ onSubmitted }: Props) {
           disabled={status === 'loading'}
           className="w-full justify-center"
         >
-          {status === 'loading' ? 'Sending...' : 'Post to Guestbook'}
+          {status === 'loading' ? 'Verzenden...' : 'Plaats in gastenboek'}
         </SparkleButton>
         {status === 'success' ? (
-          <div className="text-green-700 font-bold">Sent! Awaiting moderation 💖</div>
+          <div className="text-green-700 font-bold">Verzonden! Wacht op goedkeuring 💖</div>
         ) : null}
         {status === 'error' ? (
           <div className="text-red-700 font-bold">{error}</div>

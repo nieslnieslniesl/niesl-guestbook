@@ -14,11 +14,17 @@ export async function POST(request: Request) {
   }
 
   if (password !== adminPassword) {
-    return NextResponse.json({ message: 'Invalid password' }, { status: 401 });
+    return NextResponse.json({ message: 'Ongeldig wachtwoord' }, { status: 401 });
   }
 
   setAdminCookie();
-  const redirectUrl = new URL('/admin', request.url);
+  
+  // Get proper host from headers or use request URL
+  const host = request.headers.get('host') || new URL(request.url).host;
+  const protocol = request.headers.get('x-forwarded-proto') || 
+                   (request.url.startsWith('https') ? 'https' : 'http');
+  const redirectUrl = `${protocol}://${host}/admin`;
+  
   return NextResponse.redirect(redirectUrl);
 }
 

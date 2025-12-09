@@ -6,18 +6,18 @@ export const runtime = 'nodejs';
 
 export async function POST(request: Request) {
   if (!isAdminRequest()) {
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ message: 'Niet geautoriseerd' }, { status: 401 });
   }
 
   const body = await request.json().catch(() => ({}));
   const { action, entryId } = body as { action?: string; entryId?: number };
   if (!action || !entryId) {
-    return NextResponse.json({ message: 'Invalid payload' }, { status: 400 });
+    return NextResponse.json({ message: 'Ongeldige data' }, { status: 400 });
   }
 
   const entry = await prisma.guestbookEntry.findUnique({ where: { id: entryId } });
   if (!entry) {
-    return NextResponse.json({ message: 'Entry not found' }, { status: 404 });
+    return NextResponse.json({ message: 'Bericht niet gevonden' }, { status: 404 });
   }
 
   switch (action) {
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       ]);
       break;
     default:
-      return NextResponse.json({ message: 'Unsupported action' }, { status: 400 });
+      return NextResponse.json({ message: 'Niet ondersteunde actie' }, { status: 400 });
   }
 
   return NextResponse.json({ ok: true });

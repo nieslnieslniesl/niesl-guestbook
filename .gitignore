@@ -7,4 +7,8 @@ uploads
 pnpm-lock.yaml
 yarn.lock
 dist
+.DS_Store
 
+# Zorg dat public wel mee het repo in gaat
+!public/
+!public/.gitkeep

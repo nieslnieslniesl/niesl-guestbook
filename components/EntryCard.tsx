@@ -18,17 +18,17 @@ export function EntryCard({ name, message, imageUrl, createdAt }: Props) {
             </div>
             <div>
               <div className="font-bold text-lg">{name}</div>
-              <Badge color="blue">Posted {createdAt}</Badge>
+              <Badge color="blue">Geplaatst {createdAt}</Badge>
             </div>
           </div>
-          <Badge color="pink">Guestbook Legend</Badge>
+          <Badge color="pink">Gastenboek Legende</Badge>
         </div>
         <p className="mt-3 text-base leading-6">{message}</p>
         {imageUrl ? (
           <div className="mt-3">
             <img
               src={imageUrl}
-              alt="Guest upload"
+              alt="Gast upload"
               className="rounded-xl border-4 border-[#ffbde1] max-h-72 object-cover w-full"
             />
           </div>

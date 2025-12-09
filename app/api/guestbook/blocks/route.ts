@@ -6,7 +6,7 @@ export const runtime = 'nodejs';
 
 function requireAdmin() {
   if (!isAdminRequest()) {
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ message: 'Niet geautoriseerd' }, { status: 401 });
   }
   return null;
 }
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}));
   const { title, content, pinned = true, position = 0 } = body;
   if (!title || !content) {
-    return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
+    return NextResponse.json({ message: 'Ontbrekende velden' }, { status: 400 });
   }
 
   const block = await prisma.textBlock.create({
@@ -38,7 +38,7 @@ export async function PATCH(request: Request) {
 
   const body = await request.json().catch(() => ({}));
   const { id, title, content, pinned = true, position = 0 } = body;
-  if (!id) return NextResponse.json({ message: 'ID required' }, { status: 400 });
+  if (!id) return NextResponse.json({ message: 'ID vereist' }, { status: 400 });
 
   const block = await prisma.textBlock.update({
     where: { id: Number(id) },
@@ -59,7 +59,7 @@ export async function DELETE(request: Request) {
 
   const body = await request.json().catch(() => ({}));
   const { id } = body;
-  if (!id) return NextResponse.json({ message: 'ID required' }, { status: 400 });
+  if (!id) return NextResponse.json({ message: 'ID vereist' }, { status: 400 });
 
   await prisma.textBlock.delete({ where: { id: Number(id) } });
   return NextResponse.json({ ok: true });

@@ -149,3 +149,13 @@ button {
   box-shadow: 0 0 0 3px rgba(255, 93, 177, 0.2);
 }
 
+h1, h2, h3 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid rgba(255, 93, 177, 0.3);
+}
+

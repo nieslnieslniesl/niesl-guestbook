@@ -34,11 +34,13 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setError(data?.message || 'Save failed');
+      setError(data?.message || 'Opslaan mislukt');
       return;
     }
     onSaved?.();
-    if (!block) event.currentTarget.reset();
+    if (!block && event.currentTarget) {
+      event.currentTarget.reset();
+    }
   }
 
   async function handleDelete() {
@@ -50,7 +52,7 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setError(data?.message || 'Delete failed');
+      setError(data?.message || 'Verwijderen mislukt');
       return;
     }
     onSaved?.();
@@ -61,7 +63,7 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
       <div className="inner space-y-2">
         <div className="flex justify-between items-center gap-2">
           <h3 className="font-black">
-            {block ? 'Edit Block' : 'New Text Block'}
+            {block ? 'Blok Bewerken' : 'Nieuw Tekst Blok'}
           </h3>
           {block ? (
             <button
@@ -69,7 +71,7 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
               onClick={handleDelete}
               className="text-xs font-bold underline"
             >
-              Delete
+              Verwijderen
             </button>
           ) : null}
         </div>
@@ -77,7 +79,7 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
           name="title"
           className="input"
           defaultValue={block?.title}
-          placeholder="Title"
+          placeholder="Titel"
           required
           maxLength={100}
         />
@@ -86,7 +88,7 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
           className="input"
           rows={4}
           defaultValue={block?.content}
-          placeholder="Content"
+          placeholder="Inhoud"
           required
           maxLength={1000}
         />
@@ -98,7 +100,7 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
             defaultChecked={block?.pinned ?? true}
           />
           <label htmlFor={`pinned-${block?.id ?? 'new'}`} className="text-sm">
-            Pinned on homepage
+            Vastzetten op homepage
           </label>
         </div>
         <input
@@ -106,10 +108,10 @@ export function AdminBlockEditor({ block, onSaved }: Props) {
           type="number"
           className="input"
           defaultValue={block?.position ?? 0}
-          placeholder="Position (lower shows earlier)"
+          placeholder="Positie (lager = eerder)"
         />
         <SparkleButton type="submit" className="w-full justify-center">
-          Save Block
+          Blok Opslaan
         </SparkleButton>
         {error ? <div className="text-red-700 text-sm">{error}</div> : null}
       </div>

@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   const formData = await request.formData();
   const trap = formData.get('nickname')?.toString();
   if (trap) {
-    return NextResponse.json({ message: 'Spam detected' }, { status: 400 });
+    return NextResponse.json({ message: 'Spam gedetecteerd' }, { status: 400 });
   }
 
   const name = (formData.get('name') || '').toString().trim().slice(0, 50);
@@ -24,13 +24,13 @@ export async function POST(request: Request) {
   const file = formData.get('image') as File | null;
 
   if (!name || !message) {
-    return NextResponse.json({ message: 'Name and message are required' }, { status: 400 });
+    return NextResponse.json({ message: 'Naam en bericht zijn verplicht' }, { status: 400 });
   }
 
   let imagePath: string | null = null;
   if (file && file.size > 0) {
     if (file.size > 2 * 1024 * 1024) {
-      return NextResponse.json({ message: 'Image too large (max 2MB)' }, { status: 400 });
+      return NextResponse.json({ message: 'Afbeelding te groot (max 2MB)' }, { status: 400 });
     }
     const buffer = Buffer.from(await file.arrayBuffer());
     const ext = path.extname(file.name) || '.png';

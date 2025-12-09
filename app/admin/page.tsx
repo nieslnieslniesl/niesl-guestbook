@@ -20,36 +20,41 @@ export default async function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <AdminBlockEditor onSaved={() => location.reload()} />
-        {blocks.map((block) => (
-          <AdminBlockEditor
-            key={block.id}
-            block={{
-              id: block.id,
-              title: block.title,
-              content: block.content,
-              pinned: block.pinned,
-              position: block.position
-            }}
-            onSaved={() => location.reload()}
-          />
-        ))}
+      <section className="rainbow-border sparkle">
+        <div className="inner">
+          <h2 className="text-2xl font-black mb-4">📝 Tekst Blokken Beheren</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <AdminBlockEditor onSaved={() => location.reload()} />
+            {blocks.map((block) => (
+              <AdminBlockEditor
+                key={block.id}
+                block={{
+                  id: block.id,
+                  title: block.title,
+                  content: block.content,
+                  pinned: block.pinned,
+                  position: block.position
+                }}
+                onSaved={() => location.reload()}
+              />
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="rainbow-border sparkle">
         <div className="inner">
-          <h2 className="text-2xl font-black mb-4">Guestbook moderation</h2>
+          <h2 className="text-2xl font-black mb-4">💬 Gastenboek Moderatie</h2>
           <div className="overflow-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="text-left">
-                  <th className="py-2">Name</th>
-                  <th>Message</th>
+                  <th className="py-2">Naam</th>
+                  <th>Bericht</th>
                   <th>Status</th>
                   <th>IP</th>
-                  <th>When</th>
-                  <th>Actions</th>
+                  <th>Wanneer</th>
+                  <th>Acties</th>
                 </tr>
               </thead>
               <tbody>
